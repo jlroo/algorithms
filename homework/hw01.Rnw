@@ -116,7 +116,7 @@ Given that $a=9$, $b=2$, $f(n)=n^{3}$. Since $n^{log_{2}{9}}\approx n^{3.1699...
 \end{solution}
 \item $T(n)=8T(\lceil n/4\rceil)+n^{2}$.
 \begin{solution}
-When solving recurrances usually we can disregard floor/ceil as we are interested in the growth of the recurrance (running time). In this case we have that $a=8$, $b=4$, $f(n)=n^{2}$ and $n^{log{8}_{4}}= n^{\frac{3}{2}}$. Since $n^{log{8}_{4}}\leq n^{2}$ the recurrance follows case\# 3 of the master theorem. Such that $f(n)=\Omega(n^{log{(a+\epsilon)}_{b}})=\Omega(n^{2})$
+When solving recurrances usually we can disregard floor/ceil as we are interested in the growth of the recurrance (running time). In this case we have that $a=8$, $b=4$, $f(n)=n^{2}$ and $n^{log{8}_{4}}= n^{\frac{3}{2}}$. Since $n^{log{8}_{4}}\leq n^{2}$ the recurrance follows case\# 3 of the master theorem. Such that $f(n)=\Omega(n^{log_{b}{(a+\epsilon)}})=\Omega(n^{2})$
 \end{solution}
 \end{enumerate}
 \end{document}
