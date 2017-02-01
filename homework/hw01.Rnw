@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper,margin=1.1in]{geometry}
+\usepackage{fancyhdr,color}
+\usepackage{tikz,graphicx,multicol}
+\usepackage{amssymb,euscript,eufrak,nicefrac,enumitem}
+\usepackage{amsfonts,amsmath,amsthm} 
+\usepackage{scrextend}
+\usepackage{bm}
+
+%% Define headers & footers
+\pagestyle{fancy}
+   \lhead{Loyola University Chicago} \chead{COMP 460 Spring 2017} \rhead{\thepage}
+   \lfoot{} \cfoot{} \rfoot{}
+   \renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhf{}
+  \fancyfoot[C]{\footnotesize \thepage}
+}
+
+%% Some user-defined colors
+\definecolor{myred}{rgb}{.7,.1,.1}
+\definecolor{myblue}{rgb}{.1,.1,.7}
+\definecolor{mygreen}{rgb}{.1,.6,.1}
+
+%% Some useful commands
+\newcommand{\red}[1]{\textcolor{myred}{#1}}
+\newcommand{\blue}[1]{\textcolor{myblue}{#1}}
+\newcommand{\green}[1]{\textcolor{mygreen}{#1}}
+\sloppy
+%\flushbottom
+\parindent 1em
+\linespread{1.1}
+
+%-------------------------------------------------------
+% BEGIN: PERSONAL DEFINITIONS/SHORTCUTS
+%-------------------------------------------------------
+\newcommand{\demph}[1]{\textcolor{hilite}{\emph{#1}}}
+
+\def\NN{\mathbb N}
+\def\ZZ{\mathbb Z}
+\def\RR{\mathbb R}
+
+\def\qand{\quad\hbox{and}\quad}
+\def\qor{\quad\hbox{or}\quad}
+
+\newenvironment{prob}[2][{}]{%
+\textbf{#2}\if#1\else{\ (#1)}\fi.\,\,}{\par\bigskip}
+
+\newenvironment{solution}[1][{}]{%
+\begin{flushright}
+\begin{addmargin}[3em]{0em}
+\blue{\textit{Solution}\if#1\else{\ \textit{(to #1)}}\fi.}\,\,\ }%
+{\blue{\qed}\end{addmargin}
+\end{flushright}
+\medskip}
+
+\title{Solutions to Homework \#1}
+\author{Jose Luis Rodriguez}
+\date{January 18, 2017}
+
+\begin{document}
+
+\maketitle
+
+%-------------------------------------------------------
+\begin{prob}[HW1]{1}
+Rank the following functions by the order of growth. That is, make a list of the functions such that if $f(n)$ is on a higher line that $g(n)$, then $f(n)$ is $\Omega(g(n))$. If $f(n)$ is $\Theta(g(n))$, then $f(n)$ and $g(n)$ should be listed on the same line.
+\end{prob}
+
+\begin{solution} 
+We can use L'Hopital's rule to find what function growths faster, then rank them by order of growth.
+    \begin{multicols}{3}
+    \begin{enumerate}
+        \item $1=n^{\frac{1}{ln(n)}}$ ; $2$
+        \item $ln(ln(n))$
+        \item $\sqrt(lg(n))$
+        \item $ln(n)$ ; $lg(n)$
+        \item $lg^{2}(n)$
+        \item $\sqrt(2^{lg(n)})$
+        \item $2^{lg(n)}$
+        \item $4^{lg(n)}$
+        \item $n$
+        \item $nlg(n)$
+        \item $n^{2}$
+        \item $n^{3}$
+        \item $\Big(\frac{3}{2}\Big)^n$
+        \item $2^{n}$
+        \item $n!$
+        \item $(n+1)!$
+        \item $2^{2^{n}}$
+        \item $2^{2^{n+1}}$
+    \end{enumerate}
+    \end{multicols}
+\end{solution}
+
+\begin{prob}[HW1]{2}
+Express the solution to each of the following recurrences using $\Theta$-notation. Show your reasoning.
+\end{prob}
+- We can solve the recurrences below using the Master Theorem, given that:\\
+$T(n)=aT(n/b)+f(n)$, $a\geq 1$,$b>1$. Following three cases: \\
+\begin{enumerate}
+\item If $\exists \epsilon>0$ such that $f(n)=\mathcal{O}(n^{log_{b}{a-\epsilon}})$, then $T(n)=(n^{log_{b}{a}})$.
+\item If $f(n)=\Theta(n^{log_{b}{a}}lg^{k}n)$,with $k\geq 0$, then $T(n)=\Theta(n^{log_{b}{a}}lg^{k+1}n)$.
+\item If $\exists \epsilon>0$ such that $f(n)=\Omega(n^{log_{b}{(a+\epsilon)}})$,then $T(n)=\Theta(f(n))$.
+\end{enumerate}
+\begin{enumerate}[label=(\alph*)]
+\item $T(n)= 2T(n/2)+nlg^{2}n$. 
+\begin{solution}
+Following a more general form of the masters theorem where 
+$T(n)=aT(n/b)+\Theta(n^{k}log^{\phi}(n))$, $a\geq 1$, $b>1$, and $\phi \in \RR$. We have that $a=2$,$b=2$,$k=1$ and $f(n)=n^{log_{2}{2}}lg^{2}n$. For this case if $a=b^{k}$ and $\phi >-1$ then the solution to the recurrence follows case\#2 of the general form, such that: 
+$T(n)=\Theta(n^{log_{b}{a}}lg^{\phi+1}n) = \Theta(n^{1}lg^{3}n)$.
+\end{solution}
+\item $T(n)= 9T(n/2)+n^{3}$.
+\begin{solution}
+Given that $a=9$, $b=2$, $f(n)=n^{3}$. Since $n^{log_{2}{9}}\approx n^{3.1699...}$ is polynomially larger than $f(n)=n^{3}$ this recurrance follows case\# 1 of the masters theorem. Such that $f(n)=\mathcal{O}(n^{log_{2}{(9-\epsilon)}})$. Therefore the solution to the recurrance is given by:$T(n)=\Theta(n^{log_{b}{a}})=\Theta(n^{3})$.
+\end{solution}
+\item $T(n)=8T(\lceil n/4\rceil)+n^{2}$.
+\begin{solution}
+When solving recurrances usually we can disregard floor/ceil as we are interested in the growth of the recurrance (running time). In this case we have that $a=8$, $b=4$, $f(n)=n^{2}$ and $n^{log{8}_{4}}= n^{\frac{3}{2}}$. Since $n^{log{8}_{4}}\leq n^{2}$ the recurrance follows case\# 3 of the master theorem. Such that $f(n)=\Omega(n^{log{(a+\epsilon)}_{b}})=\Omega(n^{2})$
+\end{solution}
+\end{enumerate}
+\end{document}
