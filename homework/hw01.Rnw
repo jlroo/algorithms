@@ -79,11 +79,9 @@ We can use L'Hopital's rule to find what function growths faster, then rank them
         \item $ln(n)$ ; $lg(n)$
         \item $lg^{2}(n)$
         \item $\sqrt(2^{lg(n)})$
-        \item $2^{lg(n)}$
-        \item $4^{lg(n)}$
-        \item $n$
+        \item $2^{lg(n)}$; $n$
         \item $nlg(n)$
-        \item $n^{2}$
+        \item $n^{2}$; $4^{lg(n)}$
         \item $n^{3}$
         \item $\Big(\frac{3}{2}\Big)^n$
         \item $2^{n}$
