@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\usepackage[letterpaper,margin=1.1in]{geometry}
+\usepackage{fancyhdr,color}
+\usepackage{tikz,graphicx,multicol}
+\usepackage{amssymb,euscript,eufrak,nicefrac,enumitem}
+\usepackage{amsfonts,amsmath,amsthm} 
+\usepackage{scrextend}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{bm}
+
+%% Define headers & footers
+\pagestyle{fancy}
+   \lhead{Loyola University Chicago} \chead{COMP 460 Spring 2017} \rhead{\thepage}
+   \lfoot{} \cfoot{} \rfoot{}
+   \renewcommand{\headrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhf{}
+  \fancyfoot[C]{\footnotesize \thepage}
+}
+
+%% Some user-defined colors
+\definecolor{myred}{rgb}{.7,.1,.1}
+\definecolor{myblue}{rgb}{.1,.1,.7}
+\definecolor{mygreen}{rgb}{.1,.6,.1}
+
+%% Some useful commands
+\newcommand{\red}[1]{\textcolor{myred}{#1}}
+\newcommand{\blue}[1]{\textcolor{myblue}{#1}}
+\newcommand{\green}[1]{\textcolor{mygreen}{#1}}
+\sloppy
+%\flushbottom
+\parindent 1em
+\linespread{1.1}
+
+%-------------------------------------------------------
+% BEGIN: PERSONAL DEFINITIONS/SHORTCUTS
+%-------------------------------------------------------
+\newcommand{\demph}[1]{\textcolor{hilite}{\emph{#1}}}
+
+\def\NN{\mathbb N}
+\def\ZZ{\mathbb Z}
+\def\RR{\mathbb R}
+
+\def\qand{\quad\hbox{and}\quad}
+\def\qor{\quad\hbox{or}\quad}
+
+\newenvironment{prob}[2][{}]{%
+\textbf{#2}\if#1\else{\ (#1)}\fi.\,\,}{\par\bigskip}
+
+\newenvironment{solution}[1][{}]{%
+\begin{flushright}
+\begin{addmargin}[3em]{0em}
+\blue{\textit{Solution}\if#1\else{\ \textit{(to #1)}}\fi.}\,\,\ }%
+{\blue{\qed}\end{addmargin}
+\end{flushright}
+\medskip}
+
+\title{Solutions to Homework \#2}
+\author{Jose Luis Rodriguez}
+\date{February 8, 2017}
+
+\begin{document}
+
+\maketitle
+
+%-------------------------------------------------------
+\begin{prob}[HW2]{1}
+The operation $\textsc{Heap-Delete}(A,i)$ deletes the item in node $i$ from heap $A$. Give an implementation of $\textsc{Heap-Delete}$ that runs in $\mathcal{O}(lgn)$ time for an $n$-element-max-heap (the type used in class).
+\end{prob}
+
+\begin{solution}
+The operation $\textsc{Heap-Delete}(A,i)$ can be implemented by modifying the $\textsc{Max-Heapify}(A,i)$ procedure. Such that we check if the given node is a parent or child node. If its a parent node we determine the largest child then we exchange the parent node with the largest child and asign a $\textsc{NULL}$ value to the parent node. Finally we call $\textsc{Heapify}(A,largest)$ to make sure that we dont violate the $\textsc{Max-Heap}$ property.
+
+\alglanguage{pseudocode}
+\begin{algorithm}
+\algcblock{If}{Else}{EndIf}
+\algtext*{EndIf}
+\begin{algorithmic}[1]
+\Procedure {$\textsc{Heap-Delete}$}{$A$, $i$}
+\State $l \gets \textsc{Left}(i)$
+\State $r \gets \textsc{Right}(i)$
+  \If{$l \textsc{ AND } r$ are \textsc{ NULL }}
+    \State $A[i]=$\textsc{ NULL }
+  \Else
+    \If{$l \leq \textsc{ A.Heap-size } \textsc{ AND }$ $A[l]>A[r]$}
+      \State $largest=l$
+    \Else{ $largest=r$}
+    \EndIf
+    \State $\textit{Exchange}$ $A[i]$ with $A[largest]$
+    \State $A[i]=\textsc{ NULL }$
+    \State $A = \textsc{Heapify}(A,largest)$
+  \EndIf
+\State \textbf{return} $A$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{solution}
+
+\newpage
+
+\begin{prob}[HW2]{2}
+Show that quicksort's best-case running time is $\Omega(nlgn)$. Note that the result was stated in class, but we didn't prove that the best case corresponds to splitting the array evenly at each stage.
+\end{prob}
+
+\begin{solution}
+Recall that quicksort worst-case is given by: $T(n)\leq c(n-1)^{2}+\Theta(n)$ such that $\Theta(n)\leq cn^{2}$ for large enough constant $c$. The average case is given by: $T(n) = \Theta(n)+an lg n-\frac{a}{4}n$ such that $T(n)\leq an lg n$, for large enough constant $a$.
+\vspace{2mm}
+Now we can use induction, to show that best running time case is $\Omega(nlgn)$ for an input of size $n$. The base case is given by $n_{0}=1$ such that $T(1) = 1$. Now with $n_{0}>1$ and for $n\geq n_{0}$ and the recurrance relation given by : $T(n)= 2T(n/2)+n$. We have that:
+
+\begin{equation}
+     \begin{aligned}
+     T(n) &= T(n/2)+n & \\
+          &= 2(2T(n/4)+n/2)+n  & \\
+          &= 4T(n/4)+n+n & \\
+          &= 4T(2T(n/8)+n/4)+n+n & \\
+          &= 8T(n/8)+n+n+n & \\
+          &= 8T(2T(n/8)+n/4)+n+n+n & \\
+          &= 16T(n/8)+n+n+n+n & \\
+          & \hspace{25mm} \vdots & \\
+          &= nT(1)+n+n+\dots+n & \\
+          &\leq \Omega(nlg{n})
+     \end{aligned}
+\end{equation}
+
+\end{solution}
+
+\begin{prob}[HW2]{3}
+Suppose we change the Counting-Sort line:
+\begin{algorithmic}
+\State $\textbf{for}$ $ j\gets n $ $\textbf{ downto } 1$ $\textit{ TO }$ $\textbf{for}$ $ j\gets 1 $ $\textbf{ to } n$
+\end{algorithmic}
+
+Show that the algoriths still works properly. Is the modified algorithm stable?
+\end{prob}
+
+\begin{solution}
+Suppose we have an array $A$ of size $N$ and there are $k$ elements such that $a_1 = a_2 = \dots = a_i$. Where $a_1$ appears first in orders in the input array $A$ and $a_i$ appear after $a_1$. Now for this version of the algorithm, lets $a_1$ appear at position $x$ then it's place in the output array $B$ will be given by $B[x]$. Now lets place the element $a_2$ that appeared after $a_1$ at $B[x-1]$ in the output array. Hence the new version of the algorithmn works but reversed the order of the input, since it violates the stable property as the input $a_2$ that was after $a_1$ is placed first in the output array.
+\end{solution}
+
+\end{document}

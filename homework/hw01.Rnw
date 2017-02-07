@@ -73,15 +73,15 @@ Rank the following functions by the order of growth. That is, make a list of the
 We can use L'Hopital's rule to find what function growths faster, then rank them by order of growth.
     \begin{multicols}{3}
     \begin{enumerate}
-        \item $1=n^{\frac{1}{ln(n)}}$ ; $2$
-        \item $ln(ln(n))$
-        \item $\sqrt(lg(n))$
-        \item $ln(n)$ ; $lg(n)$
+        \item $1$ and $2$
+        \item $ln(ln{n})$
+        \item $\sqrt{lg{n}}$
+        \item $ln(n)$ and $lg{n}$
         \item $lg^{2}(n)$
-        \item $\sqrt(2^{lg(n)})$
-        \item $2^{lg(n)}$; $n$
+        \item $\sqrt{2}^{lg{n}$
+        \item $n = 2^{lg{n}}$
         \item $nlg(n)$
-        \item $n^{2}$; $4^{lg(n)}$
+        \item $n^{2} = 4^{lg{n}}$
         \item $n^{3}$
         \item $\Big(\frac{3}{2}\Big)^n$
         \item $2^{n}$
@@ -112,11 +112,11 @@ $T(n)=\Theta(n^{log_{b}{a}}lg^{\phi+1}n) = \Theta(n^{1}lg^{3}n)$.
 \end{solution}
 \item $T(n)= 9T(n/2)+n^{3}$.
 \begin{solution}
-Given that $a=9$, $b=2$, $f(n)=n^{3}$. Since $n^{log_{2}{9}}\approx n^{3.1699...}$ is polynomially larger than $f(n)=n^{3}$ this recurrance follows case\# 1 of the masters theorem. Such that $f(n)=\mathcal{O}(n^{log_{2}{(9-\epsilon)}})$. Therefore the solution to the recurrance is given by:$T(n)=\Theta(n^{log_{b}{a}})=\Theta(n^{3})$.
+Given that $a=9$, $b=2$, $f(n)=n^{3}$. Since $n^{log_{2}{9}}$ is polynomially larger than $f(n)=n^{3}$ this recurrance follows case\# 1 of the masters theorem. Such that $f(n)=\mathcal{O}(n^{log_{b}{a-\epsilon}})$. Therefore the solution to the recurrance is given by: $ T(n)=\Theta(n^{lg{9}})$.
 \end{solution}
 \item $T(n)=8T(\lceil n/4\rceil)+n^{2}$.
 \begin{solution}
-When solving recurrances usually we can disregard floor/ceil as we are interested in the growth of the recurrance (running time). In this case we have that $a=8$, $b=4$, $f(n)=n^{2}$ and $n^{log{8}_{4}}= n^{\frac{3}{2}}$. Since $n^{log{8}_{4}}\leq n^{2}$ the recurrance follows case\# 3 of the master theorem. Such that $f(n)=\Omega(n^{log_{b}{(a+\epsilon)}})=\Omega(n^{2})$
+When solving recurrances usually we can disregard floor/ceil as we are interested in the growth of the recurrance (running time). In this case we have that $a=8$, $b=4$, $f(n)=n^{2}$ and $n^{log_{4}{8}}= n^{\frac{3}{2}}$. Since $n^{log_{4}{8}}\leq n^{2}$ the recurrance follows case\# 3 of the master theorem. Such that $f(n)=\Omega(n^{log_{b}{(a+\epsilon)}})=\Omega(n^{2})$
 \end{solution}
 \end{enumerate}
 \end{document}
