@@ -58,7 +58,10 @@
 \end{flushright}
 \medskip}
 
-\title{Solutions to Homework \#2}
+\title{%
+  COMP460: Algorithms and Complexity\\
+  \large Solutions to Homework \#2  }
+    
 \author{Jose Luis Rodriguez}
 \date{February 8, 2017}
 

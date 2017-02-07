@@ -56,7 +56,9 @@
 \end{flushright}
 \medskip}
 
-\title{Solutions to Homework \#1}
+\title{%
+  COMP460: Algorithms and Complexity\\
+  \large Solutions to Homework \#1 }
 \author{Jose Luis Rodriguez}
 \date{January 18, 2017}
 
@@ -78,7 +80,7 @@ We can use L'Hopital's rule to find what function growths faster, then rank them
         \item $\sqrt{lg{n}}$
         \item $ln(n)$ and $lg{n}$
         \item $lg^{2}(n)$
-        \item $\sqrt{2}^{lg{n}$
+        \item $\sqrt{2}^{lg{n}}$
         \item $n = 2^{lg{n}}$
         \item $nlg(n)$
         \item $n^{2} = 4^{lg{n}}$
@@ -95,9 +97,10 @@ We can use L'Hopital's rule to find what function growths faster, then rank them
 
 \begin{prob}[HW1]{2}
 Express the solution to each of the following recurrences using $\Theta$-notation. Show your reasoning.
+
+\vspace{2mm}
+We can solve the recurrences below using the Master Theorem, given that: $T(n)=aT(n/b)+f(n)$, $a\geq 1$,$b>1$. Following three cases: 
 \end{prob}
-- We can solve the recurrences below using the Master Theorem, given that:\\
-$T(n)=aT(n/b)+f(n)$, $a\geq 1$,$b>1$. Following three cases: \\
 \begin{enumerate}
 \item If $\exists \epsilon>0$ such that $f(n)=\mathcal{O}(n^{log_{b}{a-\epsilon}})$, then $T(n)=(n^{log_{b}{a}})$.
 \item If $f(n)=\Theta(n^{log_{b}{a}}lg^{k}n)$,with $k\geq 0$, then $T(n)=\Theta(n^{log_{b}{a}}lg^{k+1}n)$.
