@@ -1,3 +1,4 @@
+
 \documentclass[12pt]{article}
 \usepackage[letterpaper,margin=1.1in]{geometry}
 \usepackage{fancyhdr,color}
@@ -75,28 +76,21 @@ The operation $\textsc{Heap-Delete}(A,i)$ deletes the item in node $i$ from heap
 \end{prob}
 
 \begin{solution}
-The operation $\textsc{Heap-Delete}(A,i)$ can be implemented by modifying the $\textsc{Max-Heapify}(A,i)$ procedure. Such that we check if the given node is a parent or child node. If its a parent node we determine the largest child then we exchange the parent node with the largest child and asign a $\textsc{NULL}$ value to the parent node. Finally we call $\textsc{Heapify}(A,largest)$ to make sure that we dont violate the $\textsc{Max-Heap}$ property.
+
+\vspace{5mm}
+
+The operation $\textsc{Heap-Delete}(A,i)$ can be implemented by replacing i with the last element of the array $A$. Finally we call $\textsc{Heapify}(A,i)$ to make sure that we dont violate the $\textsc{Max-Heap}$ property.
+
+\vspace{10mm}
 
 \alglanguage{pseudocode}
 \begin{algorithm}
-\algcblock{If}{Else}{EndIf}
-\algtext*{EndIf}
 \begin{algorithmic}[1]
 \Procedure {$\textsc{Heap-Delete}$}{$A$, $i$}
-\State $l \gets \textsc{Left}(i)$
-\State $r \gets \textsc{Right}(i)$
-  \If{$l \textsc{ AND } r$ are \textsc{ NULL }}
-    \State $A[i]=$\textsc{ NULL }
-  \Else
-    \If{$l \leq \textsc{ A.Heap-size } \textsc{ AND }$ $A[l]>A[r]$}
-      \State $largest=l$
-    \Else{ $largest=r$}
-    \EndIf
-    \State $\textit{Exchange}$ $A[i]$ with $A[largest]$
-    \State $A[i]=\textsc{ NULL }$
-    \State $A = \textsc{Heapify}(A,largest)$
-  \EndIf
-\State \textbf{return} $A$
+\State $lastItem \gets A[\textsc{A.Heap-size}]$
+\State $A[i] \gets lastItem$
+\State $\textsc{A.Heap-size} \gets \textsc{A.Heap-size} - 1$
+\State $\textsc{Heapify}(A,i)$
 \EndProcedure
 \end{algorithmic}
 \end{algorithm}
