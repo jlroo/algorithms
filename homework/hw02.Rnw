@@ -111,7 +111,9 @@ Show that quicksort's best-case running time is $\Omega(nlgn)$. Note that the re
 
 \begin{solution}
 Recall that quicksort worst-case is given by: $T(n)\leq c(n-1)^{2}+\Theta(n)$ such that $\Theta(n)\leq cn^{2}$ for large enough constant $c$. The average case is given by: $T(n) = \Theta(n)+an lg n-\frac{a}{4}n$ such that $T(n)\leq an lg n$, for large enough constant $a$.
-\vspace{2mm}
+
+\vspace{5mm}
+
 Now we can use induction, to show that best running time case is $\Omega(nlgn)$ for an input of size $n$. The base case is given by $n_{0}=1$ such that $T(1) = 1$. Now with $n_{0}>1$ and for $n\geq n_{0}$ and the recurrance relation given by : $T(n)= 2T(n/2)+n$. We have that:
 
 \begin{equation}
@@ -136,7 +138,6 @@ Suppose we change the Counting-Sort line:
 \begin{algorithmic}
 \State $\textbf{for}$ $ j\gets n $ $\textbf{ downto } 1$ $\textit{ TO }$ $\textbf{for}$ $ j\gets 1 $ $\textbf{ to } n$
 \end{algorithmic}
-
 Show that the algoriths still works properly. Is the modified algorithm stable?
 \end{prob}
 
